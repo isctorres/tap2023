@@ -48,18 +48,19 @@ public class Loteria extends Stage {
     }
 
     private void CrearTablilla() {
-        String[] arImagenes = {"barril.jpeg","","","","",""};
+        String[] arImagenes = {"barril.jpeg","botella.jpeg","catrin.jpeg","chavorruco.jpeg","concha.jpeg","luchador.jpeg","maceta.jpeg","rosa.jpeg","tacos.jpeg","venado.jpeg","concha.jpeg","luchador.jpeg","maceta.jpeg","rosa.jpeg","tacos.jpeg","venado.jpeg"};
         grdTablilla = new GridPane();
+        int pos = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 ImageView imv;
                 //Image imgCartaP = new Image(
                 //        new File("src/main/java/com/example/tap2023/imagenes/barril.jpeg").toURI().toString());
                 try {
-                    InputStream stream = new FileInputStream("src/main/java/com/example/tap2023/imagenes/barril.jpeg");
+                    InputStream stream = new FileInputStream("src/main/java/com/example/tap2023/imagenes/"+arImagenes[pos]);
                     Image imgCartaP = new Image(stream);
                     imv = new ImageView(imgCartaP);
-
+                    pos++;
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 }
