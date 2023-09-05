@@ -10,6 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class Loteria extends Stage {
     private Scene escena;
     private HBox hPrincipal, hBtnSeleccion;
@@ -43,12 +48,24 @@ public class Loteria extends Stage {
     }
 
     private void CrearTablilla() {
+        String[] arImagenes = {"barril.jpeg","","","","",""};
         grdTablilla = new GridPane();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
+                ImageView imv;
+                //Image imgCartaP = new Image(
+                //        new File("src/main/java/com/example/tap2023/imagenes/barril.jpeg").toURI().toString());
+                try {
+                    InputStream stream = new FileInputStream("src/main/java/com/example/tap2023/imagenes/barril.jpeg");
+                    Image imgCartaP = new Image(stream);
+                    imv = new ImageView(imgCartaP);
 
-                Image imgCartaP = new Image("barril.jpeg");
-                ImageView imv = new ImageView(imgCartaP);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+                imv.setFitHeight(140);
+                imv.setFitWidth(100);
                 arBtnTablilla[i][j] = new Button();
                 arBtnTablilla[i][j].setGraphic(imv);
 
