@@ -19,6 +19,8 @@ public class Calculadora extends Stage {
     public Calculadora(){
         CrearUI();
         escena = new Scene(vBox, 200, 200);
+        escena.getStylesheets()
+                .add(getClass().getResource("/estilos/calculadora.css").toString());
         this.setTitle("Calculadora");
         this.setScene(escena);
         this.show();

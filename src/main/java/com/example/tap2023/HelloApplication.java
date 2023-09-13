@@ -3,11 +3,13 @@ package com.example.tap2023;
 import com.example.tap2023.vistas.Calculadora;
 import com.example.tap2023.vistas.Loteria;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -54,10 +56,12 @@ public class HelloApplication extends Application {
         borderPane = new BorderPane();
         borderPane.setTop(menuBar);
 
-       escena = new Scene(borderPane, 200, 300);
-       stage.setScene(escena);
-       stage.setMaximized(true);
-       stage.show();
+        escena = new Scene(borderPane, 200, 300);
+        escena.getStylesheets()
+                .add(getClass().getResource("/estilos/estilos.css").toString());
+        stage.setScene(escena);
+        stage.setMaximized(true);
+        stage.show();
     }
 
 
