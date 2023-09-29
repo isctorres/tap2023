@@ -1,7 +1,9 @@
 package com.example.tap2023;
 
+import com.example.tap2023.modelos.Conexion;
 import com.example.tap2023.vistas.Calculadora;
 import com.example.tap2023.vistas.Loteria;
+import com.example.tap2023.vistas.Restaurante;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +21,7 @@ public class HelloApplication extends Application {
     private BorderPane borderPane;
     private MenuBar menuBar;
     private Menu menuParcial1, menuParcial2, menuSalir;
-    private MenuItem mitCalculadora, mitLoteria, mitSalir;
+    private MenuItem mitCalculadora, mitLoteria, mitSalir, mitRestaurante;
 
     private void CrearUI(){
         mitCalculadora = new MenuItem("Calculadora");
@@ -30,7 +32,10 @@ public class HelloApplication extends Application {
         menuParcial1 = new Menu("Parcial 1");
         menuParcial1.getItems().addAll(mitCalculadora,mitLoteria);
 
+        mitRestaurante = new MenuItem("Restaurante");
+        mitRestaurante.setOnAction((event)->new Restaurante());
         menuParcial2 = new Menu("Parcial 2");
+        menuParcial2.getItems().addAll(mitRestaurante);
 
         menuSalir = new Menu("Mas opciones");
         mitSalir = new MenuItem("Salir");
@@ -52,6 +57,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        connectToDB();
         CrearUI();
         borderPane = new BorderPane();
         borderPane.setTop(menuBar);
@@ -64,6 +70,10 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    public void connectToDB(){
+        Conexion.createConnection();
+        System.out.println("Conexión establecida");
+    }
 
     public static void main(String[] args) {
         launch();
