@@ -4,8 +4,10 @@ import com.example.tap2023.modelos.CategoriasDAO;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,6 +51,13 @@ public class Restaurante extends Stage {
     }
 
     private void CrearTable(){
+        TableColumn<CategoriasDAO,Integer> tbcIdCat = new TableColumn<CategoriasDAO,Integer>("ID");
+        tbcIdCat.setCellValueFactory(new PropertyValueFactory<>("idCategoria"));
+
+        TableColumn<CategoriasDAO,String> tbcNomCat = new TableColumn<CategoriasDAO,String>("Categoria");
+        tbcNomCat.setCellValueFactory(new PropertyValueFactory<>("nomCategoria"));
+
+        tbvCategorias.getColumns().addAll(tbcIdCat,tbcNomCat);
         tbvCategorias.setItems(categoriasDAO.LISTARCATEGORIAS());
     }
 }

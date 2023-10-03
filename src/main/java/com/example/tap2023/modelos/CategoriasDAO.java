@@ -9,8 +9,24 @@ import java.sql.Statement;
 
 public class CategoriasDAO {
 
-    int idCategoria;
-    String nomCategoria;
+    private int idCategoria;
+    private String nomCategoria;
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public String getNomCategoria() {
+        return nomCategoria;
+    }
+
+    public void setNomCategoria(String nomCategoria) {
+        this.nomCategoria = nomCategoria;
+    }
 
     public void INSERTAR(){
         try{
