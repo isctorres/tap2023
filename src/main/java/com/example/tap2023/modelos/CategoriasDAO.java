@@ -58,7 +58,7 @@ public class CategoriasDAO {
             e.printStackTrace();
         }
     }
-    public ObservableList<CategoriasDAO> LISTARCATEGORIAS(){
+        public ObservableList<CategoriasDAO> LISTARCATEGORIAS(){
         ObservableList<CategoriasDAO> listCat = FXCollections.observableArrayList();
         CategoriasDAO objC;
         try{

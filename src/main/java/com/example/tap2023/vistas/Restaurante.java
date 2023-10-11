@@ -1,17 +1,16 @@
 package com.example.tap2023.vistas;
 
+import com.example.tap2023.components.ButtonCell;
 import com.example.tap2023.modelos.CategoriasDAO;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.kordamp.bootstrapfx.BootstrapFX;
 import org.kordamp.bootstrapfx.scene.layout.Panel;
 
@@ -46,7 +45,7 @@ public class Restaurante extends Stage {
         CrearTable();
         btnAgregar = new Button("Agregar");
         btnAgregar.getStyleClass().setAll("btn","btn-success");                     //(2)
-        btnAgregar.setOnAction(event -> {});
+        btnAgregar.setOnAction(event -> new CategoriaForm(tbvCategorias));
         vBox = new VBox(tbvCategorias,btnAgregar);
     }
 
@@ -57,7 +56,17 @@ public class Restaurante extends Stage {
         TableColumn<CategoriasDAO,String> tbcNomCat = new TableColumn<CategoriasDAO,String>("Categoria");
         tbcNomCat.setCellValueFactory(new PropertyValueFactory<>("nomCategoria"));
 
-        tbvCategorias.getColumns().addAll(tbcIdCat,tbcNomCat);
+        TableColumn<CategoriasDAO,String> tbcEditar = new TableColumn<CategoriasDAO,String>("EDITAR");
+        tbcEditar.setCellFactory(
+                new Callback<TableColumn<CategoriasDAO, String>, TableCell<CategoriasDAO, String>>() {
+                    @Override
+                    public TableCell<CategoriasDAO, String> call(TableColumn<CategoriasDAO, String> param) {
+                        return new ButtonCell();
+                    }
+                }
+        );
+
+        tbvCategorias.getColumns().addAll(tbcIdCat,tbcNomCat,tbcEditar);
         tbvCategorias.setItems(categoriasDAO.LISTARCATEGORIAS());
     }
 }
