@@ -45,7 +45,7 @@ public class Restaurante extends Stage {
         CrearTable();
         btnAgregar = new Button("Agregar");
         btnAgregar.getStyleClass().setAll("btn","btn-success");                     //(2)
-        btnAgregar.setOnAction(event -> new CategoriaForm(tbvCategorias));
+        btnAgregar.setOnAction(event -> new CategoriaForm(tbvCategorias, null));
         vBox = new VBox(tbvCategorias,btnAgregar);
     }
 
@@ -61,12 +61,22 @@ public class Restaurante extends Stage {
                 new Callback<TableColumn<CategoriasDAO, String>, TableCell<CategoriasDAO, String>>() {
                     @Override
                     public TableCell<CategoriasDAO, String> call(TableColumn<CategoriasDAO, String> param) {
-                        return new ButtonCell();
+                        return new ButtonCell(1);
                     }
                 }
         );
 
-        tbvCategorias.getColumns().addAll(tbcIdCat,tbcNomCat,tbcEditar);
+        TableColumn<CategoriasDAO,String> tbcEliminar = new TableColumn<CategoriasDAO,String>("ELIMINAR");
+        tbcEliminar.setCellFactory(
+                new Callback<TableColumn<CategoriasDAO, String>, TableCell<CategoriasDAO, String>>() {
+                    @Override
+                    public TableCell<CategoriasDAO, String> call(TableColumn<CategoriasDAO, String> param) {
+                        return new ButtonCell(2);
+                    }
+                }
+        );
+
+        tbvCategorias.getColumns().addAll(tbcIdCat,tbcNomCat,tbcEditar,tbcEliminar);
         tbvCategorias.setItems(categoriasDAO.LISTARCATEGORIAS());
     }
 }

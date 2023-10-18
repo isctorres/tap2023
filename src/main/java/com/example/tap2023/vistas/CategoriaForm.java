@@ -16,8 +16,9 @@ public class CategoriaForm extends Stage {
     private Button btnGuardar;
     private CategoriasDAO objCatDAO;
     TableView<CategoriasDAO> tbvCategorias;
-    public CategoriaForm(TableView<CategoriasDAO> tbvCat){
+    public CategoriaForm(TableView<CategoriasDAO> tbvCat, CategoriasDAO objCatDAO){
         this.tbvCategorias = tbvCat;
+        this.objCatDAO = objCatDAO == null ? new CategoriasDAO() : objCatDAO;
         CrearUI();
         escena = new Scene(hBox);
         this.setTitle("Gestión de Categorias");
@@ -26,8 +27,9 @@ public class CategoriaForm extends Stage {
     }
 
     private void CrearUI() {
-        objCatDAO = new CategoriasDAO();
+
         txtNameCat = new TextField();
+        txtNameCat.setText(objCatDAO.getNomCategoria());
         txtNameCat.setPromptText("Nombre de la categoria");
         btnGuardar = new Button("Guardar");
         btnGuardar.setOnAction(event -> guardarCategoria());
@@ -38,7 +40,10 @@ public class CategoriaForm extends Stage {
 
     private void guardarCategoria(){
         objCatDAO.setNomCategoria(txtNameCat.getText());
-        objCatDAO.INSERTAR();
+        if( objCatDAO.getIdCategoria() > 0 )
+            objCatDAO.ACTUALIZAR();
+        else
+            objCatDAO.INSERTAR();
         tbvCategorias.setItems(objCatDAO.LISTARCATEGORIAS());
         tbvCategorias.refresh();
         this.close();
